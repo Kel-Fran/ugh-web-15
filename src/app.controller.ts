@@ -38,6 +38,7 @@ export class AppController {
         }
 
     }
+
     @Post('new')
     @Render('new')
     postNew(@Body() dto: CreateProductDTO) {
@@ -45,6 +46,19 @@ export class AppController {
         return {
             categories: this.products.map(it => it.category).filter((it, idx, arr) => arr.indexOf(it) === idx),
             message: 'success'
+
+        }
+
+    }
+
+    @Get('stats')
+    @Render('stats')
+    getStats() {
+        return {
+            totalStock: this.products.reduce((acc, r) => acc + r.stock, 0),
+            averagePrice: Math.round(this.products.reduce((acc, r) => acc + r.price, 0) / this.products.length),
+            highestPrice: Math.max(...this.products.map(it => it.price)),
+            lowestPrice: Math.min(...this.products.map(it => it.price)),
 
         }
 
