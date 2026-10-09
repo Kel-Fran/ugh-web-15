@@ -2,8 +2,15 @@ import { Body, Controller, Get, Post, Query, Render } from '@nestjs/common';
 import { AppService } from './app.service.js';
 import PRODUCTS from '../public/products.json' with {type: 'json'};
 
-type Product = typeof PRODUCTS[number]
+type _Product = typeof PRODUCTS[number]
+interface Product extends _Product { }
 type CreateProductDTO = { [k in keyof Product]?: string };
+class CreateProductDto implements CreateProductDTO {
+    name?: string;
+    category?: string;
+    price?: string;
+    stock?: string;
+}
 
 @Controller()
 export class AppController {
@@ -41,7 +48,7 @@ export class AppController {
 
     @Post('new')
     @Render('new')
-    postNew(@Body() dto: CreateProductDTO) {
+    postNew(@Body() dto: CreateProductDto) {
         this.products.push({ name: dto.name ?? '', category: dto.category ?? '', price: +(dto.price ?? 0), stock: +(dto.stock ?? 0) });
         return {
             categories: this.products.map(it => it.category).filter((it, idx, arr) => arr.indexOf(it) === idx),
