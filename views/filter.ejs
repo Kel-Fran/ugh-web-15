@@ -1,0 +1,46 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        products
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <a href="/">home</a>
+    <a href="/new">new</a>
+    <form method="GET">
+        <label for="s-category">category</label>
+        <select name="category" id="s-category">
+            <% for (const category of categories) { %>
+                <option value=<%= category %>><%= category %></option>
+            <% } %>
+        </select>
+        <input type="submit"/>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>category</th>
+                <th>price</th>
+                <th>stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const product of products) { %>
+                <tr>
+                    <td><%= product.name %></td>
+                    <td><%= product.category %></td>
+                    <td><%= product.price %></td>
+                    <td><%= product.stock %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
