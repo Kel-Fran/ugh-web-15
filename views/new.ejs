@@ -1,0 +1,34 @@
+<% const {message, categories} = locals; %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        products
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <a href="/">home</a>
+    <a href="/filter">filter</a>
+    <form method="POST">
+        <label for="i-name">name</label>
+        <input type="text" name="name" id="i-name" required/>
+        <label for="s-category">category</label>
+        <select name="category" id="s-category">
+            <% for (const category of categories) { %>
+                <option value=<%= category %>><%= category %></option>
+            <% } %>
+        </select>
+        <label for="i-price">price</label>
+        <input type="number" name="price" id="i-price" min="0" required/>
+        <label for="i-stock">stock</label>
+        <input type="number" name="stock" id="i-stock" min="0" required/>
+        <input type="submit"/>
+    </form>
+    <% if (message) { %>
+        <p style="color:green"><%= message %></p>
+    <% } %>
+</body>
+</html>
