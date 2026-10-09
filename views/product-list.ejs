@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        products
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <a href="/filter">filter</a>
+    <a href="/new">new</a>
+    <table>
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>category</th>
+                <th>price</th>
+                <th>stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const product of products) { %>
+                <tr style=<%= product.stock == 0 ? 'background-color:red;font-weight:bold' : product.stock < 5 ? 'color:red;font-weight:bold' : '' %>>
+                    <td><%= product.name %></td>
+                    <td><%= product.category %></td>
+                    <td><%= product.price %></td>
+                    <td><%= product.stock %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
